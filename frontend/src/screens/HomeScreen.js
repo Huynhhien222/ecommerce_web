@@ -32,7 +32,7 @@ const HomeScreen = ({ match }) => {
       <Meta />
       {!keyword ? (
         <>
-        <ProductCarousel />
+        {/* <ProductCarousel /> */}
         {/* <SubProduct /> */}
         </>
       ) : (
@@ -47,10 +47,10 @@ const HomeScreen = ({ match }) => {
       ) : (
         <>
         <div>
-          <Row>
+          <Row style={{ display: 'flex', width: 1200, padding: 10 }}>
             {products.map((product) => (
               //<Col key={product._id}  xl={4}>
-              <Col key={product._id} sm={20} md={8} lg={6} xl={2}>
+              <Col style={{ display: 'flex', width: 250, padding: 10 }} key={product._id} lg={3}>
                 <Product product={product} />
               </Col>
             ))}
