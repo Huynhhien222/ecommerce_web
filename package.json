@@ -16,6 +16,7 @@
   "author": "Simranjeet Singh",
   "license": "MIT",
   "dependencies": {
+    "@21epub/float-panel": "^0.3.1",
     "bcryptjs": "^2.4.3",
     "cdbreact": "^1.5.3",
     "colors": "^1.4.0",

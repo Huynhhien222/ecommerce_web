@@ -23,11 +23,11 @@ const Product = ({ product }) => {
         <Card.Text as='div'>
           <Rating
             value={product.rating}
-            text={`{product.numReviews} reviews`}
+            // text={`{product.numReviews} reviews`}
           />
         </Card.Text>
 
-        <Card.Text as='h3'>{product.price}đ</Card.Text>
+        <Card.Text as='h3'>{product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ</Card.Text>
       </Card.Body>
     </Card>
   );

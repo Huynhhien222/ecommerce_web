@@ -24,8 +24,17 @@ const App = () => {
     <Router>
       <Header />
       <main className='py-3'>
-      <Container>
-        <Route path='/admin/userlist' component={UserListScreen} />
+        <Container>
+          <Route path='/order/:id' component={OrderScreen} />
+          <Route path='/shipping' component={ShippingScreen} /> 
+          <Route path='/payment' component={PaymentScreen} />
+          <Route path='/placeorder' component={PlaceOrderScreen} />
+          <Route path='/login' component={LoginScreen} />
+          <Route path='/register' component={RegisterScreen} />
+          <Route path='/profile' component={ProfileScreen} />
+          <Route path='/product/:id' component={ProductScreen} />
+          <Route path='/cart/:id?' component={CartScreen} />
+          <Route path='/admin/userlist' component={UserListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />
           <Route
             path='/admin/productlist'
@@ -38,19 +47,7 @@ const App = () => {
             exact
           />
           <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
-          <Route path='/admin/orderlist' component={OrderListScreen} />      
-        </Container>
-    
-        <Container>
-          <Route path='/order/:id' component={OrderScreen} />
-          <Route path='/shipping' component={ShippingScreen} /> 
-          <Route path='/payment' component={PaymentScreen} />
-          <Route path='/placeorder' component={PlaceOrderScreen} />
-          <Route path='/login' component={LoginScreen} />
-          <Route path='/register' component={RegisterScreen} />
-          <Route path='/profile' component={ProfileScreen} />
-          <Route path='/product/:id' component={ProductScreen} />
-          <Route path='/cart/:id?' component={CartScreen} />
+          <Route path='/admin/orderlist' component={OrderListScreen} />
           <Route path='/search/:keyword' component={HomeScreen} exact />
           <Route path='/page/:pageNumber' component={HomeScreen} exact />
           <Route
@@ -58,13 +55,10 @@ const App = () => {
             component={HomeScreen}
             exact
           />
-          <Route path='/' component={HomeScreen} exact />        
-          
+          <Route path='/' component={HomeScreen} exact />
         </Container>
-            
+        <Footer />
       </main>
-
-      <Footer isAdmin={false} />
     </Router>
   )
 }
