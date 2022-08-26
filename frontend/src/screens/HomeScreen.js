@@ -47,10 +47,10 @@ const HomeScreen = ({ match }) => {
       ) : (
         <>
         <div>
-          <Row style={{ display: 'flex', width: 1200, padding: 10 }}>
+          <Row style={{ display: 'flex', height : 'auto' }}>
             {products.map((product) => (
               //<Col key={product._id}  xl={4}>
-              <Col style={{ display: 'flex', width: 250, padding: 10 }} key={product._id} lg={3}>
+              <Col sm={12} md={6} lg={4} xl={2}>
                 <Product product={product} />
               </Col>
             ))}
