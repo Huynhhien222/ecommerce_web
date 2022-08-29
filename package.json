@@ -9,8 +9,8 @@
     "server": "nodemon backend --ignore client",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "data:import": "node backend/database/seeder",
-    "data:destroy": "node backend/database/seeder -d",
+    "data:import": "node backend/database/seeds/seeder",
+    "data:destroy": "node backend/database/seeds/seeder -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Simranjeet Singh",
@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
     "mongoose": "^5.10.6",
     "morgan": "^1.10.0",
     "multer": "^1.4.2"
