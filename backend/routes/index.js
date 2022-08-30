@@ -1,7 +1,7 @@
-import OrderRoutes from './orderRoutes.js'
-import ProductRoutes from './productRoutes.js'
-import UserRoutes from './userRoutes.js'
-import UploadRoutes from './uploadRoutes.js'
+import OrderRoutes from './order.js'
+import ProductRoutes from './product.js'
+import UserRoutes from './user.js'
+import UploadRoutes from './upload.js'
 
 const routes = (app) => {
     app.use('/api/orders', OrderRoutes)
@@ -12,7 +12,6 @@ const routes = (app) => {
     app.get('/api/config/paypal', (req, res) =>
         res.send(process.env.PAYPAL_CLIENT_ID)
     )
-
 }
 
 export default routes

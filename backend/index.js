@@ -3,12 +3,20 @@ import express from 'express'
 import dotenv from 'dotenv'
 import colors from 'colors'
 import morgan from 'morgan'
-import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+import { notFound, errorHandler } from './middleware/ErrorMiddleware.js'
 import { connectDB } from './config/database.js'
 import routes from './routes/index.js'
+import swagger from './swaggers/index.js'
 import fs from 'fs'
 import moment from 'moment'
 const __dirname = path.resolve()
+
+//init
+const app = express()
+app.use(express.urlencoded({ extended : true }))
+app.use(express.json())
+app.use(express.static(path.join(__dirname, '/public')))
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 //environment
 dotenv.config()
@@ -16,29 +24,24 @@ dotenv.config()
 //connect MongoDB
 connectDB()
 
-//init
-const app = express()
-
 //morgan
-// create a write stream (in append mode)
 const pathFolderLogs = __dirname + `/backend/storages/logs`
-console.log(pathFolderLogs)
 if (!fs.existsSync(pathFolderLogs)) {
-    fs.mkdirSync(pathFolderLogs);
+    fs.mkdirSync(pathFolderLogs)
 }
-let accessLogStream = fs.createWriteStream(path.join(pathFolderLogs, `/${moment().format('Y_M_D')}.log`), { flags: 'a' })
+let accessLogStream = fs.createWriteStream(
+    path.join(pathFolderLogs, `/${moment().format('Y_M_D')}.log`),
+    { flags: 'a' }
+)
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('combined', { stream: accessLogStream }))
 }
 
-//json
-app.use(express.json())
-
 //routes
 routes(app)
 
-//static folder
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+//swagger
+swagger(app)
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '/frontend/build')))
@@ -55,15 +58,15 @@ if (process.env.NODE_ENV === 'production') {
 //middleware
 app.use(notFound)
 app.use(errorHandler)
+
 //config server
 const PORT = process.env.PORT || 5000
 
 app.listen(
     PORT,
     console.log(
-        `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+        `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
+            .bold
     ),
-    console.log(
-        ` - Local: http://localhost:${PORT}`.green.bold
-    )
+    console.log(` - Local: http://localhost:${PORT}`.green.bold)
 )

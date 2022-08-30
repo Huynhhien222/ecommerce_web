@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import Product from '../models/productModel.js'
+import Product from '../models/Product.js'
 
 // @desc    Fetch all products
 // @route   GET /api/products
@@ -10,11 +10,11 @@ const getProducts = asyncHandler(async (req, res) => {
 
     const keyword = req.query.keyword
         ? {
-            name: {
-                $regex: req.query.keyword,
-                $options: 'i',
-            },
-        }
+              name: {
+                  $regex: req.query.keyword,
+                  $options: 'i',
+              },
+          }
         : {}
 
     const count = await Product.countDocuments({ ...keyword })
@@ -78,15 +78,8 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-    const {
-        name,
-        price,
-        description,
-        image,
-        brand,
-        category,
-        countInStock,
-    } = req.body
+    const { name, price, description, image, brand, category, countInStock } =
+        req.body
 
     const product = await Product.findById(req.params.id)
 
