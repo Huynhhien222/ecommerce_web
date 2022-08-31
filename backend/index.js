@@ -9,15 +9,27 @@ import routes from './routes/index.js'
 import swagger from './swaggers/index.js'
 import fs from 'fs'
 import moment from 'moment'
+import i18n from 'i18n'
 const __dirname = path.resolve()
 
 //init
 const app = express()
-app.use(express.urlencoded({ extended : true }))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '/public')))
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
+//i18n
+app.use(i18n.init)
+i18n.configure({
+    locales: ['en', 'vi'],
+    directory: __dirname + '/backend/lang',
+    defaultLocale: 'en',
+    header: 'accept-language',
+    cookie: 'lang',
+    register: global,
+    autoReload: true,
+})
 //environment
 dotenv.config()
 

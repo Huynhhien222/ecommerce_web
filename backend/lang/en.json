@@ -1,0 +1,7 @@
+{
+    "username_required": "username field is required",
+    "username_email": "username field is email",
+    "password_required": "password field is required",
+    "password_min_characters": "The password field requires a minimum of %s characters",
+    "name_required": "username field is required"
+}
