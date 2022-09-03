@@ -3,10 +3,10 @@ import dotenv from 'dotenv'
 import colors from 'colors'
 import users from './users.js'
 import products from './products.js'
-import User from '../../models/User.js'
-import Product from '../../models/Product.js'
-import Order from '../../models/Order.js'
-import connectDB from '../../config/database.js'
+import user from '../../models/User.js'
+import product from '../../models/Product.js'
+import order from '../../models/Order.js'
+import { connectDB } from '../../config/database.js'
 
 dotenv.config()
 
@@ -14,11 +14,11 @@ connectDB()
 
 const importData = async () => {
     try {
-        await Order.deleteMany()
-        await Product.deleteMany()
-        await User.deleteMany()
+        await order.deleteMany()
+        await product.deleteMany()
+        await user.deleteMany()
 
-        const createdUsers = await User.insertMany(users)
+        const createdUsers = await user.insertMany(users)
 
         const adminUser = createdUsers[0]._id
 
@@ -26,7 +26,7 @@ const importData = async () => {
             return { ...product, user: adminUser }
         })
 
-        await Product.insertMany(sampleProducts)
+        await product.insertMany(sampleProducts)
 
         console.log('Data Imported!'.green.inverse)
         process.exit()
@@ -38,9 +38,9 @@ const importData = async () => {
 
 const destroyData = async () => {
     try {
-        await Order.deleteMany()
-        await Product.deleteMany()
-        await User.deleteMany()
+        await order.deleteMany()
+        await product.deleteMany()
+        await user.deleteMany()
 
         console.log('Data Destroyed!'.red.inverse)
         process.exit()

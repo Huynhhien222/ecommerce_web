@@ -89,3 +89,10 @@ admin@example.com (Admin)
 123456
 
 ```
+
+### Swagger
+```
+local: http://localhost:5000/api-docs
+
+develop: 
+```

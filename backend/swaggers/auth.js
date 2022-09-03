@@ -31,6 +31,26 @@ const authPaths = {
         post: {
             tags: ['Authorization'],
             summary: 'Login system',
+            parameters: [
+                {
+                    in: 'body',
+                    required: true,
+                    name: 'body',
+                    schema: {
+                        required: ['username', 'password', 'name'],
+                        properties: {
+                            username: {
+                                type: 'string',
+                                example: 'admin@example.com',
+                            },
+                            password: {
+                                type: 'string',
+                                example: '123456',
+                            },
+                        },
+                    },
+                },
+            ],
             responses: {
                 200: {
                     description: 'Login successfully',
