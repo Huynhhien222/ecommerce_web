@@ -1,9 +1,3 @@
-# Shopp eCommerce Platform
-
-> eCommerce platform built with the MERN stack & Redux.
-
-![screenshot](https://github.com/thesimranjeet/ecommerce_mern/blob/main/uploads/Screenshot.png)
-
 ## Features
 
 - Full featured shopping cart
@@ -40,6 +34,12 @@ PORT = 5000
 MONGO_URI = your mongodb uri
 JWT_SECRET = 'abc123'
 PAYPAL_CLIENT_ID = your paypal client id
+```
+
+Or 
+
+```
+cp .env.example .env
 ```
 
 ### Install Dependencies (frontend & backend)
@@ -88,9 +88,11 @@ Sample User Logins
 admin@example.com (Admin)
 123456
 
-john@example.com (Customer)
-123456
+```
 
-jane@example.com (Customer)
-123456
+### Swagger
+```
+local: http://localhost:5000/api-docs
+
+develop: 
 ```
