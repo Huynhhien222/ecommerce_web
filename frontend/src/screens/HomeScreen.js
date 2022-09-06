@@ -47,10 +47,9 @@ const HomeScreen = ({ match }) => {
       ) : (
         <>
         <div>
-          <Row style={{ display: 'flex', height : 'auto' }}>
+          <Row>
             {products.map((product) => (
-              //<Col key={product._id}  xl={4}>
-              <Col sm={12} md={6} lg={4} xl={2}>
+              <Col key={product._id}  md={3}>
                 <Product product={product} />
               </Col>
             ))}
@@ -70,3 +69,5 @@ const HomeScreen = ({ match }) => {
 
 export default HomeScreen
 // <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+//<Col sm={12} md={6} lg={4} xl={2}>
+//Row style={{ display: 'flex', height : 'auto' }}>
