@@ -8,11 +8,11 @@ const apiSuccess = (res, message = 'success', data = [], status = 200) => {
     return res.status(status).json(response)
 }
 
-const apiError = (res, message = 'success', data = [], status = 400) => {
+const apiError = (res, message = 'success', errors = [], status = 400) => {
     let response = {
         status: 'error',
         message,
-        data,
+        errors,
     }
 
     return res.status(status).json(response)

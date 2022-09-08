@@ -1,41 +1,25 @@
-import { validationResult, checkSchema } from 'express-validator'
-import { resourceMessageError } from './HelperRequest.js'
+import { Validator } from 'node-input-validator'
+import * as apiRespone from '../helpers/ApiRespone.js'
 
 const loginRequest = async (req, res, next) => {
-    await checkSchema({
-        username: {
-            notEmpty: {
-                errorMessage: __('username_required'),
-                bail: true,
-            },
-            isEmail: {
-                errorMessage: __('username_email'),
-                bail: true,
-            },
-        },
-        password: {
-            notEmpty: {
-                errorMessage: __('password_required'),
-                bail: true,
-            },
-            isLength: {
-                options: { min: 6 },
-                errorMessage: __('password_min_characters', 6),
-                bail: true,
-            },
-        },
-    }).run(req)
-
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-        let messages = resourceMessageError(errors)
-        return res.status(422).json({
-            status: 'error',
-            errors: messages,
-        })
+    const rules = {
+        username: 'required|email',
+        password: 'required',
     }
 
-    next()
+    const messages = {
+        'username.required': 'The username field is required',
+        'password.required': 'The password field is required',
+    }
+
+    const v = new Validator(req.body, rules, messages)
+    const matched = await v.check()
+
+    if (!matched) {
+        apiRespone.apiError(res, 'failed', v.errors, 422)
+    } else {
+        next()
+    }
 }
 
 export default loginRequest
