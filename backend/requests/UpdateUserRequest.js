@@ -1,49 +1,21 @@
-import { validationResult, checkSchema } from 'express-validator'
-import userModel from '../models/User.js'
-import { resourceMessageError } from './HelperRequest.js'
+import { Validator } from 'node-input-validator'
+import * as apiRespone from '../helpers/ApiRespone.js'
 
-export default async (req, res, next) => {
-    await checkSchema({
-        email: {
-            if: {
-                options: (value) => {
-                    if (value) {
-                        return true
-                    }
-                    return false
-                },
-            },
-            isEmail: {
-                options: async (value) => {},
-                errorMessage: __('email is invalid'),
-                bail: true,
-            },
-            custom: {
-                options: async (value) => {
-                    if (value) {
-                        const userExists = await userModel.findOne({
-                            email: value,
-                            $nor: [{ _id: req.params.id }],
-                        })
-
-                        if (userExists) {
-                            throw new Error('email already exists')
-                        }
-                    }
-                },
-                bail: true,
-            },
-        },
-    }).run(req)
-
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-        let messages = resourceMessageError(errors)
-        return res.status(422).json({
-            status: 'error',
-            errors: messages,
-        })
+const updateUserRequest = async (req, res, next) => {
+    const rules = {
+        email: 'email|unique:User,email,' + req.params.id,
     }
 
-    next()
+    const messages = {}
+
+    const v = new Validator(req.body, rules, messages)
+    const matched = await v.check()
+
+    if (!matched) {
+        apiRespone.apiError(res, 'failed', v.errors, 422)
+    } else {
+        next()
+    }
 }
+
+export default updateUserRequest

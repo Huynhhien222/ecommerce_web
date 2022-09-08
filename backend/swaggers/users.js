@@ -116,7 +116,195 @@ const userPaths = {
                 },
             },
         },
+        put: {
+            tags: ['Users'],
+            summary: 'Update a user',
+            parameters: [
+                {
+                    in: 'body',
+                    required: true,
+                    name: 'body',
+                    schema: {
+                        required: ['email', 'isAdmin', 'name'],
+                        properties: {
+                            email: {
+                                type: 'string',
+                                example: 'admin@example.com',
+                            },
+                            name: {
+                                type: 'string',
+                                example: 'admin',
+                            },
+                            isAdmin: {
+                                type: 'boolean',
+                                example: true,
+                            },
+                        },
+                    },
+                },
+            ],
+            responses: {
+                200: {
+                    description: 'Success',
+                    schema: {
+                        $ref: '#/components/userComponents/user',
+                    },
+                },
+                400: {
+                    description: 'Error',
+                    schema: {
+                        $ref: '#/components/errors/occurredError',
+                    },
+                },
+                404: {
+                    description: 'Error',
+                    schema: {
+                        properties: {
+                            status: {
+                                type: 'string',
+                                example: 'error',
+                            },
+                            message: {
+                                type: 'string',
+                                example: 'User not found',
+                            },
+                            data: {
+                                type: 'array',
+                                example: [],
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        delete: {
+            tags: ['Users'],
+            summary: 'Delete a user',
+            responses: {
+                200: {
+                    description: 'Success',
+                    schema: {
+                        properties: {
+                            status: {
+                                type: 'string',
+                                example: 'success',
+                            },
+                            message: {
+                                type: 'string',
+                                example: 'Success',
+                            },
+                            data: {
+                                type: 'array',
+                                example: [],
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Error',
+                    schema: {
+                        $ref: '#/components/errors/occurredError',
+                    },
+                },
+            },
+        },
     },
+    '/api/users/profile':{
+        get: {
+            tags: ['Users'],
+            summary: 'Get profile',
+            responses: {
+                200: {
+                    description: 'Success',
+                    schema: {
+                        $ref: '#/components/userComponents/user',
+                    },
+                },
+                400: {
+                    description: 'Error',
+                    schema: {
+                        $ref: '#/components/errors/occurredError',
+                    },
+                },
+                404: {
+                    description: 'Error',
+                    schema: {
+                        properties: {
+                            status: {
+                                type: 'string',
+                                example: 'error',
+                            },
+                            message: {
+                                type: 'string',
+                                example: 'User not found',
+                            },
+                            data: {
+                                type: 'array',
+                                example: [],
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        put: {
+            tags: ['Users'],
+            summary: 'Update profile',
+            parameters: [
+                {
+                    in: 'body',
+                    required: true,
+                    name: 'body',
+                    schema: {
+                        required: ['name'],
+                        properties: {
+                            email: {
+                                type: 'string',
+                                example: 'user1@example.com',
+                            },
+                            name: {
+                                type: 'string',
+                                example: 'user1',
+                            },
+                        },
+                    },
+                },
+            ],
+            responses: {
+                200: {
+                    description: 'Success',
+                    schema: {
+                        $ref: '#/components/userComponents/user',
+                    },
+                },
+                400: {
+                    description: 'Error',
+                    schema: {
+                        $ref: '#/components/errors/occurredError',
+                    },
+                },
+                404: {
+                    description: 'Error',
+                    schema: {
+                        properties: {
+                            status: {
+                                type: 'string',
+                                example: 'error',
+                            },
+                            message: {
+                                type: 'string',
+                                example: 'User not found',
+                            },
+                            data: {
+                                type: 'array',
+                                example: [],
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    }
 }
 
 export { userPaths, userComponents }

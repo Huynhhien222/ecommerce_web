@@ -13,7 +13,7 @@ const authController = {
     login: async (req, res) => {
         const { username, password } = req.body
 
-        const user = await userModel.findOne({ email: username })
+        const user = await userModel.findOne({ username })
 
         if (user && (await user.matchPassword(password))) {
             let response = {
@@ -38,6 +38,7 @@ const authController = {
         const { name, username, password } = req.body
 
         const user = await userModel.create({
+            username,
             name,
             email: username,
             password,

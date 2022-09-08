@@ -11,12 +11,10 @@ const authComponents = {
                     type: 'object',
                     properties: {
                         token: {
-                            // type: 'string',
                             example:
                                 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMGVmZDI3NGIxMTZkMTc0MDBjZm',
                         },
                         token_type: {
-                            // type: 'string',
                             example: 'bearer',
                         },
                     },

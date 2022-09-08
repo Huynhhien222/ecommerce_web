@@ -10,6 +10,7 @@ import swagger from './swaggers/index.js'
 import fs from 'fs'
 import moment from 'moment'
 import i18n from 'i18n'
+import validator from './config/validator.js'
 const __dirname = path.resolve()
 
 //init
@@ -48,6 +49,9 @@ let accessLogStream = fs.createWriteStream(
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('combined', { stream: accessLogStream }))
 }
+
+//validator
+validator()
 
 //routes
 routes(app)
