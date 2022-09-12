@@ -1,7 +1,7 @@
 import { Validator } from 'node-input-validator'
 import * as apiRespone from '../helpers/ApiRespone.js'
 
-const updateUserRequest = async (req, res, next) => {
+const updateUserValidator = async (req, res, next) => {
     const rules = {
         email: 'email|unique:User,email,' + req.params.id,
     }
@@ -18,4 +18,4 @@ const updateUserRequest = async (req, res, next) => {
     }
 }
 
-export default updateUserRequest
+export default updateUserValidator

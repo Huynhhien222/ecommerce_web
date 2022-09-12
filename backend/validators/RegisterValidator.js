@@ -1,15 +1,15 @@
 import { Validator } from 'node-input-validator'
 import * as apiRespone from '../helpers/ApiRespone.js'
 
-const loginRequest = async (req, res, next) => {
+const registerValidator = async (req, res, next) => {
     const rules = {
-        username: 'required|email',
-        password: 'required',
+        username: 'required|email|unique:User,username,',
+        password: 'required|minLength:6',
+        name: 'required',
     }
 
     const messages = {
         'username.required': 'The username field is required',
-        'password.required': 'The password field is required',
     }
 
     const v = new Validator(req.body, rules, messages)
@@ -22,4 +22,4 @@ const loginRequest = async (req, res, next) => {
     }
 }
 
-export default loginRequest
+export default registerValidator
