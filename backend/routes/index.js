@@ -4,6 +4,7 @@ import userAdminRoutes from './admin/user.js'
 import userFrontEndRoutes from './frontend/user.js'
 import uploadRoutes from './upload.js'
 import authRoutes from './auth.js'
+import categoryAdminRoutes from './admin/category.js'
 // import authMiddleware from '../middleware/authMiddleware.js'
 
 const routes = (app) => {
@@ -11,7 +12,7 @@ const routes = (app) => {
 
     //admin
     app.use('/api/admin/users', userAdminRoutes)
-    
+    app.use('/api/admin/category', categoryAdminRoutes)
     //frontend
     app.use('/api/users', userFrontEndRoutes)
     app.use('/api/orders', orderRoutes)

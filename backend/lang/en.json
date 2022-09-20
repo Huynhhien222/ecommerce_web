@@ -9,5 +9,7 @@
 	"Token is invalid": "Token is invalid",
 	"Success": "Success",
 	"User not found": "User not found",
-	"email is invalid": "email is invalid"
+	"email is invalid": "email is invalid",
+	"Error": "Error",
+	"Category not found": "Category not found"
 }
